@@ -17,3 +17,6 @@ python main.py
 wget https://raw.githubusercontent.com/avnyadav/sensor-fault-detection/main/aps_failure_training
 to download dataset
 '''
+''' 
+this file is commited by sameer
+'''
