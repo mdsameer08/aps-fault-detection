@@ -9,6 +9,9 @@ from sensor import utils
 import numpy as np
 from sensor.config import TARGET_COLUMN
 
+
+
+
 class DataValidation:
 
 
@@ -22,8 +25,9 @@ class DataValidation:
             self.validation_error=dict()
         except Exception as e:
             raise SensorException(e, sys)
+
     
-    
+
     def drop_missing_values_columns(self,df:pd.DataFrame,report_key_name:str)->Optional[pd.DataFrame]:
         """
         This function will drop column which contains missing value more than specified threshold
@@ -31,7 +35,6 @@ class DataValidation:
         df: Accepts a pandas dataframe
         threshold: Percentage criteria to drop a column
         =====================================================================================
-
         returns Pandas DataFrame if atleast a single column is available after missing columns drop else None
         """
         try:
@@ -52,7 +55,7 @@ class DataValidation:
             return df
         except Exception as e:
             raise SensorException(e, sys)
-    
+
     def is_required_columns_exists(self,base_df:pd.DataFrame,current_df:pd.DataFrame,report_key_name:str)->bool:
         try:
            
