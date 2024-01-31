@@ -8,8 +8,7 @@ TRAIN_FILE_NAME = "train.csv"
 TEST_FILE_NAME = "test.csv"
 TRANSFORMER_OBJECT_FILE_NAME = "transformer.pkl"
 TARGET_ENCODER_OBJECT_FILE_NAME = "target_encoder.pkl"
-MODEL_FILE_NAME ="model.pkl"
-
+MODEL_FILE_NAME = "model.pkl"
 
 class TrainingPipelineConfig:
 
@@ -17,7 +16,7 @@ class TrainingPipelineConfig:
         try:
             self.artifact_dir = os.path.join(os.getcwd(),"artifact",f"{datetime.now().strftime('%m%d%Y__%H%M%S')}")
         except Exception  as e:
-            raise SensorException(e,sys)
+            raise SensorException(e,sys)     
 
 
 class DataIngestionConfig:
@@ -38,7 +37,7 @@ class DataIngestionConfig:
         try:
             return self.__dict__
         except Exception  as e:
-            raise SensorException(e,sys)
+            raise SensorException(e,sys)     
 
 class DataValidationConfig:
 
@@ -68,8 +67,16 @@ class ModelTrainerConfig:
         self.overfitting_threshold = 0.1
 
 
+class ModelEvaluationConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.change_threshold = 0.01
 
+class ModelPusherConfig:
 
-
-class ModelEvaluationConfig:...
-class ModelPusherConfig:...
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_pusher_dir = os.path.join(training_pipeline_config.artifact_dir , "model_pusher")
+        self.saved_model_dir = os.path.join("saved_models")
+        self.pusher_model_dir = os.path.join(self.model_pusher_dir,"saved_models")
+        self.pusher_model_path = os.path.join(self.pusher_model_dir,MODEL_FILE_NAME)
+        self.pusher_transformer_path = os.path.join(self.pusher_model_dir,TRANSFORMER_OBJECT_FILE_NAME)
+        self.pusher_target_encoder_path = os.path.join(self.pusher_model_dir,TARGET_ENCODER_OBJECT_FILE_NAME)
